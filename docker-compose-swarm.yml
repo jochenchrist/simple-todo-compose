@@ -1,0 +1,30 @@
+# docker-compose.yml
+version: '3'
+services:
+  web:
+    image: "jochenchrist/simple-todo-web"
+    ports: 
+     - "80:80"
+    deploy:
+      replicas: 2
+  service:
+    image: "jochenchrist/simple-todo-service"
+    ports: 
+     - "8080:8080"
+    networks:
+     - database
+    depends_on: 
+     - mongo
+    deploy:
+      replicas: 2
+  mongo:
+    image: "mongo"
+    networks:
+      - database
+  monog-express:
+    image: "mongo-express"
+    networks:
+      - database
+
+networks:
+  database:

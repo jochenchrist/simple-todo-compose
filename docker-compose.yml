@@ -1,0 +1,26 @@
+# docker-compose.yml
+version: '3'
+services:
+  web:
+    image: "todo-web"
+    ports: 
+     - "80:80"
+  service:
+    image: "todo-service"
+    ports: 
+     - "8080:8080"
+    networks:
+     - database
+    depends_on: 
+     - mongo
+  mongo:
+    image: "mongo"
+    networks:
+      - database
+  monog-express:
+    image: "mongo-express"
+    networks:
+      - database
+
+networks:
+  database:
